@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+    <!-- 在namespace为main下配置跳转到GetGuideItemListAction，并条用list方法-->
+    <package name="main" namespace="/" extends="struts-default" >
+        <default-action-ref name="frontpage"></default-action-ref>
+   		<action name="frontpage" class="com.nazca.inside.guide.action.GetGuideItemListAction" method="list">
+   			<result>/index.jsp</result>
+   		</action>
+    </package>
+</struts>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context path="/">
+    <Resource name="jdbc/yz_inside_guide" 
+        auth="Container" 
+        type="javax.sql.DataSource" 
+        username="root" 
+        password="123" 
+        maxIdle="30" 
+        maxWait="10000" 
+        maxActive="100"
+        driverClassName="com.mysql.jdbc.Driver"
+        url="jdbc:mysql://127.0.0.1:3306/yz_inside_guide?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true"
+        logAbandoned="true" />
+</Context>

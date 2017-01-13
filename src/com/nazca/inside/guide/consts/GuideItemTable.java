@@ -9,50 +9,50 @@
 package com.nazca.inside.guide.consts;
 
 /**
- * å‘å¯¼é¡¹ç›®è¡¨
+ * Ïòµ¼ÏîÄ¿±í
  *
- * @author èµµæ´ªå¤ <zhaohongkun@yzhtech.com>
+ * @author ÕÔºéÀ¤ <zhaohongkun@yzhtech.com>
  */
     public interface GuideItemTable{ 
          String TABLE_NAME = "guideitem";
          /**
-          * å‘å¯¼ç±»å‹
+          * Ïòµ¼ÀàĞÍ
           */
          String GUIDE_TYPE = "guide_type";
          /**
-          * ç”¨äºæ’åºçš„å­—æ®µ
+          * ÓÃÓÚÅÅĞòµÄ×Ö¶Î
           */
          String SORT_ORDER = "sort_order";
          /**
-          * ç¡®å®šå”¯ä¸€æ€§çš„ID
+          * È·¶¨Î¨Ò»ĞÔµÄID
           */
          String ID ="id";
          /**
-          * ç½‘ç«™åç§°ã€å·¥å…·åç§°æˆ–è€…é¡¹ç›®åç§°
+          * ÍøÕ¾Ãû³Æ¡¢¹¤¾ßÃû³Æ»òÕßÏîÄ¿Ãû³Æ
           */
          String NAME = "name";
          /**
-          * é¡¹ç›®æè¿°
+          * ÏîÄ¿ÃèÊö
           */
          String DES = "des";
          /**
-          * å†…ç½‘å…¥å£URL
+          * ÄÚÍøÈë¿ÚURL
           */
          String INNER_URL = "inner_url";
          /**
-          * å¤–ç½‘å…¥å£URL
+          * ÍâÍøÈë¿ÚURL
           */
          String OUTER_URL = "outer_url";
          /**
-          * è‹¹æœç³»ç»Ÿå¹³å°ä¸‹è½½URL
+          * Æ»¹ûÏµÍ³Æ½Ì¨ÏÂÔØURL
           */
          String DOWNLOAD_URL_FORIOS = "download_url_forios";
          /**
-          * å®‰å“ç³»ç»Ÿå¹³å°ä¸‹è½½URL
+          * °²×¿ÏµÍ³Æ½Ì¨ÏÂÔØURL
           */
          String DOWNLOAD_URL_FORANDROID = "download_url_forandroid";
          /**
-          * ç”µè„‘ç«¯ä¸‹è½½URL
+          * µçÄÔ¶ËÏÂÔØURL
           */
          String DOWNLOAD_URL_FORPC = "download_url_forpc";
     }

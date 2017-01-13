@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 /**
- * actionæŠ½è±¡ï¼Œæä¾›è·å–request
+ * action³éÏó£¬Ìá¹©»ñÈ¡request
  *
- * @author èµµæ´ªå¤ <zhaohongkun@yzhtech.com>
+ * @author ÕÔºéÀ¤ <zhaohongkun@yzhtech.com>
  */
 public class AbstractAction extends ActionSupport implements ServletRequestAware {
 

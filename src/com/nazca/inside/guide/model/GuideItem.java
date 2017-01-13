@@ -8,75 +8,91 @@
  */
 package com.nazca.inside.guide.model;
 
-import com.nazca.inside.guide.enums.GuideType;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.nazca.inside.guide.enums.GuideType;
+
 /**
- * åˆ›å»ºè‹±æ™ºå…´è¾¾å†…éƒ¨å…±äº«é¡µçš„åŸºç¡€æ¨¡å‹
+ * ´´½¨Ó¢ÖÇĞË´ïÄÚ²¿¹²ÏíÒ³µÄ»ù´¡Ä£ĞÍ
  *
- * @author èµµæ´ªå¤ <zhaohongkun@yzhtech.com>
+ * @author ÕÔºéÀ¤ <zhaohongkun@yzhtech.com>
  */
+@Entity
 public class GuideItem implements Serializable {
 
     private static final long serialVersionUID = -6973443873720007931L;
     /**
-     * ç¡®å®šå”¯ä¸€æ€§çš„ID
+     * È·¶¨Î¨Ò»ĞÔµÄID
      */
-    private String id;
+    private Integer id;
     /**
-     * å‘å¯¼ç±»å‹
+     * Ïòµ¼ÀàĞÍ
      */
     private GuideType guideType;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+    
     /**
-     * ç½‘ç«™åç§°ã€å·¥å…·åç§°æˆ–è€…é¡¹ç›®åç§°
+     * ÍøÕ¾Ãû³Æ¡¢¹¤¾ßÃû³Æ»òÕßÏîÄ¿Ãû³Æ
      */
     private String name;
     /**
-     * é¡¹ç›®æè¿°
+     * ÏîÄ¿ÃèÊö
      */
     private String des;
     /**
-     * å†…ç½‘å…¥å£URL
+     * ÄÚÍøÈë¿ÚURL
      */
     private String innerUrl;
     /**
-     * å¤–ç½‘å…¥å£URL
+     * ÍâÍøÈë¿ÚURL
      */
     private String outerUrl;
     /**
-     * è‹¹æœç³»ç»Ÿå¹³å°ä¸‹è½½URL
+     * Æ»¹ûÏµÍ³Æ½Ì¨ÏÂÔØURL
      */
     private String downloadUrlForIos;
     /**
-     * å®‰å“ç³»ç»Ÿå¹³å°ä¸‹è½½URL
+     * °²×¿ÏµÍ³Æ½Ì¨ÏÂÔØURL
      */
     private String downloadUrlForAndroid;
     /**
-     * ç”µè„‘ç«¯ä¸‹è½½URL
+     * µçÄÔ¶ËÏÂÔØURL
      */
     private String downloadUrlForPc;
     /**
-     * ç”¨äºæ’åºçš„å­—æ®µ
+     * ÓÃÓÚÅÅĞòµÄ×Ö¶Î
      */
     private int sortOrder;
-
-    public String getId() {
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-
+    
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name="guide_type")
     public GuideType getGuideType() {
         return guideType;
     }
-
+    
     public void setGuideType(GuideType guideType) {
         this.guideType = guideType;
     }
@@ -96,7 +112,8 @@ public class GuideItem implements Serializable {
     public void setDes(String des) {
         this.des = des;
     }
-
+    
+    @Column(name="inner_url")
     public String getInnerUrl() {
         return innerUrl;
     }
@@ -105,6 +122,7 @@ public class GuideItem implements Serializable {
         this.innerUrl = innerUrl;
     }
 
+    @Column(name="outer_url")
     public String getOuterUrl() {
         return outerUrl;
     }
@@ -112,7 +130,8 @@ public class GuideItem implements Serializable {
     public void setOuterUrl(String outerUrl) {
         this.outerUrl = outerUrl;
     }
-
+    
+    @Column(name="download_url_forios")
     public String getDownloadUrlForIos() {
         return downloadUrlForIos;
     }
@@ -120,7 +139,8 @@ public class GuideItem implements Serializable {
     public void setDownloadUrlForIos(String downloadUrlForIos) {
         this.downloadUrlForIos = downloadUrlForIos;
     }
-
+    
+    @Column(name="download_url_forandroid")
     public String getDownloadUrlForAndroid() {
         return downloadUrlForAndroid;
     }
@@ -128,7 +148,8 @@ public class GuideItem implements Serializable {
     public void setDownloadUrlForAndroid(String downloadUrlForAndroid) {
         this.downloadUrlForAndroid = downloadUrlForAndroid;
     }
-
+    
+    @Column(name="download_url_forpc")
     public String getDownloadUrlForPc() {
         return downloadUrlForPc;
     }
@@ -136,7 +157,8 @@ public class GuideItem implements Serializable {
     public void setDownloadUrlForPc(String downloadUrlForPc) {
         this.downloadUrlForPc = downloadUrlForPc;
     }
-
+    
+    @Column(name="sort_order")
     public int getSortOrder() {
         return sortOrder;
     }

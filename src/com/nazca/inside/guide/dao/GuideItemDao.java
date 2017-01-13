@@ -8,67 +8,68 @@
  */
 package com.nazca.inside.guide.dao;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.stereotype.Component;
+
 import com.nazca.inside.guide.consts.GuideItemTable;
 import com.nazca.inside.guide.enums.GuideType;
 import com.nazca.inside.guide.model.GuideItem;
-import com.nazca.inside.guide.util.DBConnFactory;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * å®ç°è·å¾—listçš„å…·ä½“æ–¹æ³•çš„ç±»
+ * ÊµÏÖ»ñµÃlistµÄ¾ßÌå·½·¨µÄÀà
  *
- * @author èµµæ´ªå¤ <zhaohongkun@yzhtech.com>
+ * @author ÕÔºéÀ¤ <zhaohongkun@yzhtech.com>
  */
-public class GuideItemDao implements GuideItemTable{
-    private static final String GET_GUIDE_ITEM_INFO ="select * from "+ GuideItemTable.TABLE_NAME + " where " + GuideItemTable.GUIDE_TYPE +" = ? order by " + GuideItemTable.SORT_ORDER;
-    /**
-     * ä»æ•°æ®åº“è·å¾—é¡µé¢æ˜¾ç¤ºçš„æ•°æ®çš„list
-     *
-     * @param guideType
-     * @return è¿”å›guideItemsList
-     */
-    public List<GuideItem> queryList(String guideType) throws Exception{
-        Connection conn = null; 
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        List<GuideItem> guideItems = null;
-        try {
-            conn = DBConnFactory.getConnection(DBConnFactory.DB_YZ_INSIDE_GUIDE);
-            ps = conn.prepareStatement(GET_GUIDE_ITEM_INFO);
-            ps.setString(1, guideType);
-            rs = ps.executeQuery();
-            guideItems = new ArrayList<>();
-            while (rs.next()) {
-                GuideItem gi = new GuideItem();
-                gi.setId(rs.getString(GuideItemTable.ID));
-                if (rs.getString(GuideItemTable.GUIDE_TYPE).equals(GuideType.web.name())) {
-                    gi.setGuideType(GuideType.web);
-                }
-                if (rs.getString(GuideItemTable.GUIDE_TYPE).equals(GuideType.sys.name())) {
-                    gi.setGuideType(GuideType.sys);
-                }
-                if (rs.getString(GuideItemTable.GUIDE_TYPE).equals(GuideType.doc.name())) {
-                    gi.setGuideType(GuideType.doc);
-                }
-                gi.setName(rs.getString(GuideItemTable.NAME));
-                gi.setDes(rs.getString(GuideItemTable.DES));
-                gi.setInnerUrl(rs.getString(GuideItemTable.INNER_URL));
-                gi.setOuterUrl(rs.getString(GuideItemTable.OUTER_URL));
-                gi.setDownloadUrlForIos(rs.getString(GuideItemTable.DOWNLOAD_URL_FORIOS)); 
-                gi.setDownloadUrlForAndroid(rs.getString(GuideItemTable.DOWNLOAD_URL_FORANDROID));
-                gi.setDownloadUrlForPc(rs.getString(GuideItemTable.DOWNLOAD_URL_FORPC));
-                gi.setSortOrder(rs.getInt(GuideItemTable.SORT_ORDER));
-                guideItems.add(gi);
-            }
-        }catch (Exception e) {
-            throw e;
-        }finally { 
-           DBConnFactory.closeAll(conn, ps, rs);
-        }
-         return guideItems;
-    }
+@Component
+public class GuideItemDao implements GuideItemTable {
+
+	private HibernateTemplate hibernateTemplate;
+
+	/**
+	 * ´ÓÊı¾İ¿â»ñµÃÒ³ÃæÏÔÊ¾µÄÊı¾İµÄlist
+	 *
+	 * @param guideType
+	 * @return ·µ»ØguideItemsList
+	 */
+	public List<GuideItem> queryList(String guideType) throws Exception {
+		List<GuideItem> guideItemList = hibernateTemplate.find("from GuideItem c where c.guideType = ?",
+				new Object[] { GuideType.valueOf(guideType) });
+		return guideItemList;
+	}
+
+	public void deleteGuidItemById(int id) {
+		hibernateTemplate.load(GuideItem.class, id);
+		GuideItem guideItem = (GuideItem) hibernateTemplate.load(GuideItem.class, id);
+		hibernateTemplate.delete(guideItem);
+	}
+
+	public HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
+	}
+
+	@Resource
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
+
+	public void addGuidItem(GuideItem guideItem) {
+		// TODO Auto-generated method stub
+		hibernateTemplate.save(guideItem);
+	}
+
+	public GuideItem loadGuidItem(int id) {
+		// TODO Auto-generated method stub
+		return (GuideItem) hibernateTemplate.load(GuideItem.class, id);
+	}
+
+	public void updateGuidItem(GuideItem guideItem) {
+		// TODO Auto-generated method stub
+		System.out.println("DaoµÄÃû×Ö£º"+guideItem.getDes());
+		hibernateTemplate.update(guideItem);
+	}
+
 }

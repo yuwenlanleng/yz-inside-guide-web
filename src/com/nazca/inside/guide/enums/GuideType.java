@@ -9,27 +9,27 @@
 package com.nazca.inside.guide.enums;
 
 /**
- * 鍒涘缓GuideType涓夌绫诲瀷鐨勬灇涓鹃泦鍚�
+ * 创建GuideType三种类型的枚举集合
  *
- * @author 璧垫椽鍧� <zhaohongkun@yzhtech.com>
+ * @author 赵洪坤 <zhaohongkun@yzhtech.com>
  */
 public enum GuideType {
     web {
         @Override
         public String toString() {
-            return "服务资源显示区";
+            return "服务资源";
         }
     },
     sys {
         @Override
         public String toString() {
-            return "工具显示区";
+            return "管理系统";
         }
     },
     doc {
         @Override
         public String toString() {
-            return "常用文档显示";
+            return "常用文档";
         }
     }
 }

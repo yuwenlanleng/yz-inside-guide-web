@@ -5,11 +5,47 @@
     "http://struts.apache.org/dtds/struts-2.1.dtd">
 
 <struts>
-    <!-- 在namespace为main下配置跳转到GetGuideItemListAction，并条用list方法-->
-    <package name="main" namespace="/" extends="struts-default" >
-        <default-action-ref name="frontpage"></default-action-ref>
-   		<action name="frontpage" class="com.nazca.inside.guide.action.GetGuideItemListAction" method="list">
-   			<result>/index.jsp</result>
-   		</action>
-    </package>
+
+	<constant name="struts.devMode" value="true"></constant>
+	<!-- 在namespace为main下配置跳转到GetGuideItemListAction，并条用list方法 -->
+	<package name="main" namespace="/" extends="struts-default">
+		<default-action-ref name="frontpage"></default-action-ref>
+		<action name="frontpage" class="guideItemAction" method="list">
+			<result>/index.jsp</result>
+		</action>
+		<action name="delete" class="guideItemAction" method="deleteGuideItem">
+			<result type="redirectAction">frontpage</result>
+		</action>
+		<action name="add" class="guideItemAction" method="addInput">
+			<result name="input">admin/GuideItem-addInput.jsp</result>
+		</action>
+		<action name="update" class="guideItemAction" method="updateInput">
+			<result name="input">admin/GuideItem-updateInput.jsp</result>
+		</action>
+		<action name="updateGuideItem" class="guideItemAction" method="updateGuideItem">
+			<result type="redirectAction">frontpage</result>
+		</action>
+		<action name="addGuideItem" class="guideItemAction" method="addGuideItem">
+			<result type="redirectAction">frontpage</result>
+		</action>
+		<action name="addUser" class="userAction" method="addUser">
+			<result type="redirectAction">frontpage</result>
+		</action>
+		<action name="checkUserName" class="userAction" method="checkUserName">
+			<result type="stream">
+			<param name="user.userName">inputStream</param>
+			</result>
+		</action>
+		<action name="login" class="userAction" method="checkLogin">
+			<result type="redirectAction">frontpage</result>
+			<!-- <result type="stream">
+			<param name="user.userName">inputStream</param>
+			</result> -->
+		</action>
+		<action name="checkloginUserName" class="userAction" method="checkLoginName">
+			<result type="stream">
+			<param name="user.userName">inputStream</param>
+			</result>
+		</action>
+	</package>
 </struts>

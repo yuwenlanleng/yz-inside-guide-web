@@ -8,30 +8,77 @@
  */
 package com.nazca.inside.guide.service;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Component;
+
 import com.nazca.inside.guide.dao.GuideItemDao;
 import com.nazca.inside.guide.model.GuideItem;
-import java.util.List;
+
 /**
- * ç”¨æ¥è·å¾—GuideItemListçš„çš„serviceå±‚çš„å®ç°çš„ç±»
+ * ÓÃÀ´»ñµÃGuideItemListµÄµÄservice²ãµÄÊµÏÖµÄÀà
  *
- * @author èµµæ´ªå¤ <zhaohongkun@yzhtech.com>
+ * @author ÕÔºéÀ¤ <zhaohongkun@yzhtech.com>
  */
+@Component
 public class GuideItemService {
 
-    /**
-     * ç”¨æ¥è·å¾—GuideItemListçš„çš„serviceå±‚çš„å®ç°çš„æ–¹æ³•
-     *
-     * @param guideType ä¼ å…¥ç”¨æ¥åŒºåˆ†æŸ¥è¯¢webã€docã€sys
-     * @return GuideItemçš„list
-     */
-    public List<GuideItem> getGuideItemListByguideType(String guideType) {
-        GuideItemDao dao = new GuideItemDao();
-        List<GuideItem> guideItemList = null;
-        try {
-            guideItemList = dao.queryList(guideType);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return guideItemList;
-    }
+	GuideItemDao guideItemDao;
+
+	public GuideItemDao getGuideItemDao() {
+		return guideItemDao;
+	}
+
+	@Resource
+	public void setGuideItemDao(GuideItemDao guideItemDao) {
+		this.guideItemDao = guideItemDao;
+	}
+
+	/**
+	 * ÓÃÀ´»ñµÃGuideItemListµÄµÄservice²ãµÄÊµÏÖµÄ·½·¨
+	 *
+	 * @param guideType
+	 *            ´«ÈëÓÃÀ´Çø·Ö²éÑ¯web¡¢doc¡¢sys
+	 * @return GuideItemµÄlist
+	 */
+	public List<GuideItem> getGuideItemListByguideType(String guideType) {
+		List<GuideItem> guideItemList = null;
+		try {
+			guideItemList = guideItemDao.queryList(guideType);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return guideItemList;
+	}
+
+	/**
+	 * É¾³ıÄ³Ò»Ìõ¼ÇÂ¼
+	 * 
+	 * @param guideItemId
+	 */
+	public void deleteGuideItemById(int guideItemId) {
+		guideItemDao.deleteGuidItemById(guideItemId);
+	}
+
+	/**
+	 * Ìí¼ÓÒ»Ìõ¼ÇÂ¼
+	 * @param guideItem
+	 */
+	public void addGuideItem(GuideItem guideItem) {
+		// TODO Auto-generated method stub
+		guideItemDao.addGuidItem(guideItem);
+	}
+
+	public GuideItem loadById(int id) {
+		// TODO Auto-generated method stub
+		GuideItem guideItem	= guideItemDao.loadGuidItem(id);
+		return guideItem;
+	}
+
+	public void updateGuideItem(GuideItem guideItem) {
+		// TODO Auto-generated method stub
+		guideItemDao.updateGuidItem(guideItem);
+	}
 }

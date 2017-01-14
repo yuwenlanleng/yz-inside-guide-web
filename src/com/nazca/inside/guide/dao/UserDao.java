@@ -90,9 +90,9 @@ public class UserDao implements GuideItemTable {
 		List<User> userList = getUserByName(user);
 
 		if (userList != null && userList.size() > 0) {
-			return "true";
-		} else {
 			return "false";
+		} else {
+			return "true";
 		}
 	}
 

@@ -8,7 +8,7 @@
 		}
 	});
 	
-	
+
 	//等待对话框
 	$('#loading').dialog({
 		autoOpen : false,
@@ -147,20 +147,17 @@
 	});
 	
 	
-	$('#member, #logout').hide();
-	
 	if ($.cookie('user')) {
-		$('#member, #logout').show();
-		$('#reg_a, #login_a').hide();
-		$('#member').html($.cookie('user'));
+		$('#logout,#reg_a').show();
+		$('#login_a,#reg_user').hide();
+		$('#member').html($.cookie('user')+"|");
 	} else {
-		$('#member, #logout').hide();
-		$('#reg_a, #login_a').show();
+		$('#member,#logout,#reg_a').hide();
+		$('#login_a,#reg_user').show();
 	}
 	
 	$('#logout').click(function () {
 		$.removeCookie('user');
-		$('#body').load('frontpage'); 
 	});
 	
 	
@@ -175,7 +172,7 @@
 		modal : true,
 		resizable : false,
 		width : 400,
-		height : 560,
+		height : 400,
 		buttons : {
 			'提交' : function () {
 				$(this).submit();
@@ -217,9 +214,9 @@
 			var errors = this.numberOfInvalids();
 			
 			if (errors > 0) {
-				$('#regUser').dialog('option', 'height', errors * 30 + 540);  //得到错误数*20在原来的高度上相加
+				$('#regUser').dialog('option', 'height', errors * 30 + 400);  //得到错误数*20在原来的高度上相加
 			} else {
-				$('#regUser').dialog('option', 'height', 540);
+				$('#regUser').dialog('option', 'height', 400);
 			}
 			
 			this.defaultShowErrors();
@@ -333,7 +330,7 @@
 		
 	});
 	
-	
+	//=====================================================================
 	/**
 	 * 登录
 	 */
@@ -363,7 +360,9 @@
 					$('#login').dialog('widget').find('button').eq(1).button('disable');
 				},
 				success : function (responseText, statusText) {
-					if (responseText) {
+					
+					if (responseText=='true') {
+						alert($.type(responseText));
 						$('#body').load('frontpage');  //成功以后做刷新
 						$('#login').dialog('widget').find('button').eq(1).button('enable');
 						$('#loading').css('background', 'url(img/success.gif) no-repeat 20px center').html('用户登录成功...');
@@ -385,6 +384,11 @@
 							$('#member').html($.cookie('user'));
 						}, 1000);
 						
+					}else{
+						$('#loading').dialog('close');
+						$('#login').dialog('widget').find('button').eq(1).button('enable');
+						/*$('#login').dialog('option', 'height', 700);*/
+						$('#login').dialog('widget').find('.login_error').css('display','block').text('密码或用户名错误！').css('color','red'); 
 					}
 				},
 			});
@@ -423,10 +427,10 @@
 			"user.passWord" : {
 				required : true,
 				minlength : 6,
-				remote : {
+			/*	remote : {
 					url : 'login',
 					type : 'POST',
-				},
+				},*/
 			},
 			
 		},
@@ -439,11 +443,15 @@
 			"user.passWord" : {
 				required : '密码不得为空！',
 				minlength : jQuery.format('帐号不得小于{0}位！'),
-				remote : '用户名或密码不正确！',
+				/*remote : '用户名或密码不正确！',*/
 			},
 		
 		}
 	});
+	
+	//=======================================================================
+	
+	
 	
 	$('#login_a').click(function(){
 		$('#login').dialog('open');
